@@ -12,9 +12,15 @@
   "author": "fancy_whale@126.com",
   "license": "ISC",
   "devDependencies": {
+    "@types/node": "^7.0.5",
     "gulp": "^3.9.1",
+    "gulp-rename": "^1.2.2",
+    "gulp-sass": "^3.1.0",
     "gulp-typescript": "^3.1.5",
     "gulp-util": "^3.0.8",
     "watchify": "^3.9.0"
+  },
+  "dependencies": {
+    "wx.d.ts": "^0.10.102800"
   }
 }

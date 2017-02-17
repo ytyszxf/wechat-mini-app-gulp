@@ -13,13 +13,16 @@
     "declaration": false,
     "baseUrl": "./src",
     "outDir": "dist",
+    "only-arrow-functions": false,
     "paths": {
     },
     "lib": [
       "dom",
       "es6"
     ],
-    "types": [
+    "typeRoots": [
+      "./typings", 
+      "./node_modules/@types"
     ]
   },
   "exclude": [

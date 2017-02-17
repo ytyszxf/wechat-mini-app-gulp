@@ -6,10 +6,6 @@
     // Custom
     "trailing-comma": [false, {"multiline": "always", "singleline": "never"}],
     "interface-name": [false, "always-prefix"],
-    // Angular 2
-    "component-class-suffix": true,
-    // "component-selector": [true, "element", "my", "kebab-case"],
-    "directive-class-suffix": true,
     // "directive-selector": [true, "attribute", "my", "camelCase"],
     "import-destructuring-spacing": true,
     "invoke-injectable": true,
@@ -18,6 +14,7 @@
     "no-forward-ref": true,
     "no-input-rename": true,
     "no-output-rename": true,
+    "no-reference": false,
     "pipe-naming": [true, "camelCase", "my"],
     "templates-use-public": true,
     "use-host-property-decorator": true,
@@ -25,6 +22,7 @@
     "use-life-cycle-interface": true,
     "use-output-property-decorator": true,
     "use-pipe-transform-interface": true,
+    "object-literal-shorthand": false,
     // General
     "no-console": [true,
       "time",
