@@ -1,5 +1,5 @@
 # wechart mini app -- gulp + typescript construction 
-
+# 微信小程序 typescript + gulp 构筑
 ## prerequisite
 
 > wechart mini app IDE
