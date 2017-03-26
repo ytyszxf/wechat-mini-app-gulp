@@ -4,7 +4,15 @@
     <image class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
     <text class="userinfo-nickname">{{userInfo.nickName}}</text>
   </view>
-  <view class="usermotto">
-    <text class="user-motto">{{motto}}</text>
+  <view class="weui-cells__title">带说明的列表项</view>
+  <view class="weui-cells">
+    <view class="weui-cell">
+      <view class="weui-cell__bd weui-cell__primary">
+        <p>标题文字</p>
+      </view>
+      <view class="weui-cell__ft">
+        说明文字
+      </view>
+    </view>
   </view>
 </view>

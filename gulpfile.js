@@ -7,9 +7,9 @@ var rename = require("gulp-rename");
 
 var paths = {
   pages: ['src/**/*.wxml'],
-  css: ['src/**/*.scss'],
+  css: ['src/**/*.scss', 'src/**/*.wxss'],
   tscripts: ['src/**/*.ts'],
-  configs: ['./src/*.json']
+  configs: ['./src/**/*.json']
 };
 
 gulp.task('watch', ['compile', 'copy-ui', 'sass', 'copy-confg'], function() {
