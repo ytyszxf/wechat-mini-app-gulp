@@ -1,2 +1,81 @@
 /**app.wxss**/
 @import './weui.wxss';
+@import './global.scss';
+@import './iconfont.scss'; 
+
+page{
+  height: 100%;
+  color: $color-text;
+}
+
+.app-container{
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  .app-header{
+    height: 28px;
+    background: $color-primary;
+    color: $color-light;
+    font-size: 13px;
+  }
+  .app-content{
+    background: #efefef;
+    overflow: auto;
+    flex: 1;
+  }
+  .app-footer{
+    background: #fff;
+    box-shadow: 0px 0px 3px 1px rgba(0,0,0, 0.1);
+  }
+}
+
+button{
+  font-size: 13px;
+  &.weui-btn{
+    margin-top: 10px;
+    &:first-child{
+      margin-top: 0px;
+    }
+  }
+
+  &[type="primary"]{
+    background-color: $color-primary;
+    color: #fff;
+    &.weui-btn.button-hover{
+      background-color: darken($color-primary, 30%);
+    }
+  }
+  &.inset{
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+}
+
+icon[type="success"] {
+  &.success{
+    color: $color-primary;
+  }
+}
+
+.text-center{
+  text-align: center;
+}
+
+.app-footer.tabbar{
+  height: 53px;
+  & > view {
+    text-align: center;
+    font-size: 13px;
+    color: $color-default;
+    &.active{
+      color: $color-primary;
+    }
+    icon{
+      font-size: 23px;
+    }
+    span {
+      position: relative;
+      top: -5px;
+    }
+  }
+}

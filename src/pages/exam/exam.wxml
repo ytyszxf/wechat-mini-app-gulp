@@ -1,0 +1,66 @@
+<!--index.wxml-->
+<view class="app-container" bindtouchstart="onTouchStart" bindtouchend="onTouchEnd">
+  <view class="app-header text-center">
+    <span>倒计时 {{timeLeft}}</span>
+  </view>
+
+  <view class="app-content">
+    <view>
+      <label class="question-type">{{questionType}}</label>
+    </view>
+    <view class="question-title">
+      {{questionIndex + 1}}. 
+        <span wx:for="{{content}}">
+          <span wx:if="{{item.type === 'text'}}">{{item.content}}</span>
+          <image mode="aspectFit" wx:if="{{item.type === 'img'}}" src="{{url + item.url}}"></image>
+        </span>
+    </view>
+    <view>
+      <radio-group bindchange="onRadioQuectionChecked" wx:if="{{questionType === '单选题' || questionType === '判断题'}}">
+        <label class="weui-cell weui-check__label" wx:key="{{item.id}}" wx:for="{{choices}}">
+          <radio class="weui-check" value="{{item.id}}" checked="{{item.bChose}}"/>
+          <view class="weui-cell__hd weui-check__hd_in-checkbox">
+            <icon class="weui-icon-checkbox_circle" type="circle" size="23" wx:if="{{!item.bChose}}"></icon>
+            <icon class="weui-icon-checkbox_success" type="success" size="23" wx:if="{{item.bChose}}"></icon>
+          </view>
+          <view class="weui-cell__bd question-choice" wx:if="{{!item.bImage}}">{{item.content}}</view>
+          <view class="weui-cell__bd question-choice" wx:if="{{item.bImage}}">
+            <image mode="aspectFit" src="{{item.content}}"></image>
+          </view>
+        </label>
+      </radio-group>
+      <checkbox-group bindchange="onQuectionChecked" wx:if="{{questionType === '多选题' || questionType === '逻辑题'}}">
+        <label class="weui-cell weui-check__label" wx:key="{{item.id}}" wx:for="{{choices}}">
+          <checkbox class="weui-check" value="{{item.id}}" checked="{{item.bChose}}"/>
+          <view class="weui-cell__hd weui-check__hd_in-checkbox">
+            <icon class="weui-icon-checkbox_circle" type="circle" size="23" wx:if="{{!item.bChose}}"></icon>
+            <icon class="weui-icon-checkbox_success" type="success" size="23" wx:if="{{item.bChose}}"></icon>
+          </view>
+          <view class="weui-cell__bd question-choice" wx:if="{{!item.bImage}}">{{item.content}}</view>
+          <view class="weui-cell__bd question-choice" wx:if="{{item.bImage}}">
+            <image mode="aspectFit" src="{{item.content}}"></image>
+          </view>
+        </label>
+      </checkbox-group>
+    </view>
+    <view class="controls">
+      <button class="weui-btn inset" type="primary" 
+        wx:if="{{questionIndex < exam.examQuestions.length -1}}"
+        bindtap="goNext"
+      >下一题</button>
+      <button class="weui-btn inset" type="primary" 
+        wx:if="{{questionIndex > 0}}"
+        bindtap="goPrevious"
+      >上一题</button>
+    </view>
+  </view>
+
+  <view class="app-footer weui-flex exam-footer">
+    <view class="weui-flex__item">
+      <icon class="icon iconfont icon-rfq"></icon>交卷
+    </view>
+    <view>
+      <icon class="icon iconfont icon-all"></icon> {{questionIndex + 1}} / {{exam.examQuestions.length}}
+    </view>
+  </view>
+</view>

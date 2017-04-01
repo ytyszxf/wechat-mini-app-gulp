@@ -1,0 +1,22 @@
+<template name="tabbar">
+  <view class="tabbar weui-flex app-footer">
+    <view data-ref="index" bindtap="navigateTo"
+      class="weui-flex__item {{activeIndex===0? 'active': ''}}"
+      >
+        <view><icon class="icon iconfont icon-home"></icon></view>
+        <view><span>首页</span></view>
+    </view>
+    <view class="weui-flex__item {{activeIndex===1? 'active': ''}}"
+      data-ref="support" bindtap="navigateTo"
+      >
+        <view><icon class="icon iconfont icon-store"></icon></view>
+        <view><span>百宝箱</span></view>
+    </view>
+    <view data-ref="user" bindtap="navigateTo"
+      class="weui-flex__item {{activeIndex===2? 'active': ''}}"
+      >
+        <view><icon class="icon iconfont icon-account"></icon></view>
+        <view><span>我的</span></view>
+    </view>
+  </view>
+</template>

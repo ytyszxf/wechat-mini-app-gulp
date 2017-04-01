@@ -1,26 +1,17 @@
 {
   "pages":[
+    "pages/modules/modules",
     "pages/index/index",
+    "pages/user/user",
+    "pages/exam/exam",
     "pages/logs/logs",
     "pages/test/test"
   ],
   "window":{
     "backgroundTextStyle":"light",
-    "navigationBarBackgroundColor": "#fff",
+    "navigationBarBackgroundColor": "#3286fe",
     "navigationBarTitleText": "WeChat",
-    "navigationBarTextStyle":"black"
-  },
-  "tabBar": {
-    "list": [{
-      "pagePath": "pages/index/index",
-      "text": "首页"
-    }, {
-      "pagePath": "pages/logs/logs",
-      "text": "日志"
-    }, {
-      "pagePath": "pages/test/test",
-      "text": "测试"
-    }]
+    "navigationBarTextStyle":"#fff"
   },
   "networkTimeout": {
     "request": 10000,

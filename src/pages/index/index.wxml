@@ -1,18 +1,8 @@
 <!--index.wxml-->
-<view class="container">
-  <view  bindtap="bindViewTap" class="userinfo">
-    <image class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
-    <text class="userinfo-nickname">{{userInfo.nickName}}</text>
+<import src="../components/tabbar.wxml"/>
+<view class="app-container">
+  <view class="userinfo app-content">
+    
   </view>
-  <view class="weui-cells__title">带说明的列表项</view>
-  <view class="weui-cells">
-    <view class="weui-cell">
-      <view class="weui-cell__bd weui-cell__primary">
-        <p>标题文字</p>
-      </view>
-      <view class="weui-cell__ft">
-        说明文字
-      </view>
-    </view>
-  </view>
+  <template is="tabbar" data="{{activeIndex: 0}}"/>
 </view>

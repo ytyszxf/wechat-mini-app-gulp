@@ -9,14 +9,16 @@ var paths = {
   pages: ['src/**/*.wxml'],
   css: ['src/**/*.scss', 'src/**/*.wxss'],
   tscripts: ['src/**/*.ts'],
+  js: ['src/**/*.js'],
   configs: ['./src/**/*.json']
 };
 
-gulp.task('watch', ['compile', 'copy-ui', 'sass', 'copy-confg'], function() {
+gulp.task('watch', ['compile', 'copy-ui', 'sass', 'copy-config', 'copy-js'], function() {
   gulp.watch(paths.tscripts, ['compile']);
   gulp.watch(paths.pages, ['copy-ui']);
   gulp.watch(paths.css, ['sass']);
-  gulp.watch(paths.configs, ['copy-config'])
+  gulp.watch(paths.configs, ['copy-config']);
+  gulp.watch(paths.js, ['copy-js']);
 });
 
 gulp.task("copy-ui", function () {
@@ -24,6 +26,10 @@ gulp.task("copy-ui", function () {
     .pipe(gulp.dest("dist"));
 });
 
+gulp.task("copy-js", function () {
+  return gulp.src(paths.js)
+    .pipe(gulp.dest("dist"));
+});
 
 gulp.task('compile', function() {
   var tsResult = gulp.src(paths.tscripts) // or tsProject.src()
@@ -32,7 +38,7 @@ gulp.task('compile', function() {
   return tsResult.js.pipe(gulp.dest('dist'));
 });
 
-gulp.task('copy-confg', function () {
+gulp.task('copy-config', function () {
   return gulp.src(paths.configs)
     .pipe(gulp.dest('dist'));
 });

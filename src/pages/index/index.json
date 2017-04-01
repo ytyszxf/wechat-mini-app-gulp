@@ -1,0 +1,20 @@
+{
+  "tabBar": {
+    "list": [{
+      "pagePath": "pages/index/index",
+      "text": "首页",
+      "iconPath": "http://www.fancywhale.cn/imgs/home.png",
+      "selectedIconPath": "http://www.fancywhale.cn/imgs/home-active.png"
+    }, {
+      "pagePath": "pages/logs/logs",
+      "text": "百宝箱",
+      "iconPath": "http://www.fancywhale.cn/imgs/store.png",
+      "selectedIconPath": "http://www.fancywhale.cn/imgs/store-active.png"
+    }, {
+      "pagePath": "pages/test/test",
+      "text": "我",
+      "iconPath": "http://www.fancywhale.cn/imgs/user.png",
+      "selectedIconPath": "http://www.fancywhale.cn/imgs/user-active.png"
+    }]
+  }
+}

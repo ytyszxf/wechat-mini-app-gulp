@@ -1,0 +1,9 @@
+<!--index.wxml-->
+<import src="../components/tabbar.wxml"/>
+<view class="app-container">
+  <view bindtap="bindViewTap" class="userinfo app-content">
+    <image class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
+    <text class="userinfo-nickname">{{userInfo.nickName}}</text>
+  </view>
+  <template is="tabbar" data="{{activeIndex: 2}}"/>
+</view>

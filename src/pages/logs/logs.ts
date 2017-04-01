@@ -1,4 +1,4 @@
-import { formatTime } from '../../utils/util';
+import { Utils } from '../../utils/util';
 
 Page({
   data: {
@@ -7,7 +7,7 @@ Page({
   onLoad: function () {
     this.setData({
       logs: (wx.getStorageSync('logs') || []).map(function (log) {
-        return formatTime(new Date(log));
+        return Utils.formatTime(new Date(log));
       })
     });
   }

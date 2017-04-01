@@ -1,21 +1,23 @@
+import { User } from '../../models/user.interface';
 import { Utils } from '../../utils/util';
 
 let app = getApp();
 
+interface State {
+  userInfo?: User;
+}
 
-let pageSettings: IPage = {
-  data: {
-    motto: 'Hello World',
-    
-  },
-  //事件处理函数
-  bindViewTap() {
-    wx.navigateTo({
-      url: '../test/test'
-    });
-  },
+let state: State = {};
+
+Page({
+  data: state,
   onLoad() {
-    
+    app.getUserInfo((user) => {
+      //更新数据
+      this.setData({
+        userInfo: user
+      });
+    });
   },
   navigateTo(e) {
     let ref = e.currentTarget.dataset.ref;
@@ -33,6 +35,4 @@ let pageSettings: IPage = {
         break;
     }
   }
-};
-
-Page(pageSettings);
+});
