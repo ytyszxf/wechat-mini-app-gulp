@@ -1,3 +1,4 @@
+import { appState } from '../services/app-state.service';
 export class Utils {
   public static formatTime(date) {
     let year = date.getFullYear();

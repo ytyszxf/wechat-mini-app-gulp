@@ -1,20 +1,48 @@
-.userinfo {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+@import '../../global.scss';
+
+
+.portrait-panel{
+  align-content: space-between;
+  justify-content: space-between;
+  font-size: 23rpx;
+  height: 136rpx;
+  .userinfo-avatar {
+    width: 96rpx;
+    height: 96rpx;
+    position: absolute;
+    top: 20rpx;
+    left: 20rpx;
+    border-radius: 50%;
+  }
+
+  .userinfo-nickname {
+    position:absolute;
+    left:136rpx;
+    top:40rpx;
+  }
+  .userinfo-wanshan {
+    position:absolute;
+    left:136rpx;
+    top:72rpx;
+    color: #aaa;
+  }
+
+  .count-container{
+    height: 100%;
+    position: absolute;
+    right: 0px;
+    line-height: 136rpx;
+    .left-count{
+      border: solid 1rpx $color-primary;
+      padding: 10rpx;
+      border-radius: 24rpx;
+      color: $color-primary;
+      margin: 15rpx;
+    }
+  }
+  
 }
 
-.userinfo-avatar {
-  width: 128rpx;
-  height: 128rpx;
-  margin: 20rpx;
-  border-radius: 50%;
-}
-
-.userinfo-nickname {
-  color: #aaa;
-}
-
-.usermotto {
-  margin-top: 200px;
+.input-panel{
+  font-size: 25rpx;
 }

@@ -1,1 +1,28 @@
 /**index.wxss**/
+
+.exam-block{
+  background-color: #fff;
+}
+
+.weui-grid{
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  justify-content: center;
+  .weui-grid__label{
+    font-size: 25rpx;
+  }
+}
+
+.grid-center{
+  
+}
+.module-pic{
+  width: 128rpx;
+  height:128rpx;
+}
+
+.module-pic-sm{
+  width: 64rpx;
+  height:64rpx;
+}

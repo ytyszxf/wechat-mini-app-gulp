@@ -1,9 +1,31 @@
 <!--index.wxml-->
 <import src="../components/tabbar.wxml"/>
 <view class="app-container">
-  <view bindtap="bindViewTap" class="userinfo app-content">
-    <image class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
-    <text class="userinfo-nickname">{{userInfo.nickName}}</text>
+  <view class="app-content">
+    <view class="weui-panel weui-flex portrait-panel">
+      <view class="userinfo">
+        <image class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
+        <text class="userinfo-nickname">{{userInfo.nickName}}</text>
+        <text class="userinfo-wanshan">完善资料></text>
+      </view>
+      <view class="count-container">
+        <span class="left-count">剩余：{{userInfo.account.availableCount - userInfo.account.usedCount}}</span>
+      </view>
+    </view>
+
+    <view class="weui-cells weui-cells_after-title weui-panel input-panel">
+      <view class="weui-cell weui-cell_input">
+          <view class="weui-cell__hd">
+              <view class="weui-label">模拟卡号</view>
+          </view>
+          <view class="weui-cell__bd">
+              <input class="weui-input" value="{{accountNumber}}" bindinput="accountInput" placeholder="请输入模拟卡号"/>
+          </view>
+      </view>
+      <view class="weui-cell">
+        <button class="weui-btn" disabled="{{!accountNumber}}" style="width: 100%" type="primary" bindtap="rechargeAccount">充入账号</button>
+      </view>
+    </view>
   </view>
   <template is="tabbar" data="{{activeIndex: 2}}"/>
 </view>

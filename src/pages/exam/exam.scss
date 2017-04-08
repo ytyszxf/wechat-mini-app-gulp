@@ -1,5 +1,9 @@
 @import '../../global.scss';
 
+.question-type-container{
+  height: 55rpx;
+  line-height: 55rpx;
+}
 .question-type{
   border-color: $color-primary;
   border-style: solid;

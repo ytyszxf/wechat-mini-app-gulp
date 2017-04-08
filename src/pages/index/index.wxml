@@ -1,8 +1,35 @@
 <!--index.wxml-->
 <import src="../components/tabbar.wxml"/>
 <view class="app-container">
-  <view class="userinfo app-content">
-    
+  <view class="app-content">
+    <view class="weui-grids a4 exam-block">
+      <block>
+        <view class="weui-grid c2 r2">
+          <view class="grid-center" bindtap="startExam">
+            <image class="weui-grid__icon module-pic" src="http://www.fancywhale.cn/imgs/exam.png" />
+            <view class="weui-grid__label">模拟考试</view>
+          </view>
+        </view>
+      </block>
+      <block>
+        <view class="weui-grid c2 no-padding no-border">
+          <view class="weui-grids a4 no-border">
+            <view class="weui-grid c4 r1">
+              <image class="weui-grid__icon module-pic-sm" src="http://www.fancywhale.cn/imgs/error.png" />
+              <view class="weui-grid__label">我的错题</view>
+            </view>
+            <view class="weui-grid c2 r1">
+              <image class="weui-grid__icon module-pic-sm" src="http://www.fancywhale.cn/imgs/statistics.png" />
+              <view class="weui-grid__label">学习统计</view>
+            </view>
+            <view class="weui-grid c2 r1">
+              <image class="weui-grid__icon module-pic-sm" src="http://www.fancywhale.cn/imgs/history.png" />
+              <view class="weui-grid__label">考试记录</view>
+            </view>
+          </view>
+        </view>
+      </block>
+    </view>
   </view>
   <template is="tabbar" data="{{activeIndex: 0}}"/>
 </view>

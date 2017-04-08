@@ -1,3 +1,5 @@
+import { Account } from './account.interface';
+
 export enum sex {
   unknow, female, male
 }
@@ -15,4 +17,5 @@ export interface User {
     appid: string;
     timestamp: string;
   };
+  account: Account;
 }

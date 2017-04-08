@@ -26,6 +26,7 @@ page{
   .app-footer{
     background: #fff;
     box-shadow: 0px 0px 3px 1px rgba(0,0,0, 0.1);
+    overflow: hidden;
   }
 }
 
@@ -43,6 +44,9 @@ button{
     color: #fff;
     &.weui-btn.button-hover{
       background-color: darken($color-primary, 30%);
+    }
+    &[disabled]{
+      background-color: lighten($color-primary, 20%);
     }
   }
   &.inset{
@@ -78,4 +82,42 @@ icon[type="success"] {
       top: -5px;
     }
   }
+}
+
+$row-height: 100px;
+
+.weui-grids.a4 {
+  &.no-border{
+    border-top: none;
+    border-left: none;
+  }
+  .weui-grid{
+    width: 25%;
+    &.no-padding{
+      padding: 0px;
+    }
+    &.no-border{
+      border-right: 0px;
+      border-bottom: 0px;
+    }
+    &.c2{
+      width: 50%;
+    }
+    &.c3{
+      width: 75%;
+    }
+    &.c4{
+      width: 100%;
+    }
+    &.r1{
+      height: $row-height;
+    }
+    &.r2{
+      height: $row-height * 2;
+    }
+  }
+}
+
+.weui-panel__bd{
+  padding: 1rem;
 }

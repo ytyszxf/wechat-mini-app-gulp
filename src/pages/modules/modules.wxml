@@ -2,10 +2,10 @@
   <view class="app-content">
     <view class="weui-grids module-container">
         <block wx:for="{{modules}}" wx:key="{{item.id}}">
-            <navigator url="" class="weui-grid" hover-class="weui-grid_active">
-                <image class="weui-grid__icon module-pic" src="{{'https://fancywhale.cn/' + item.picture}}" />
+            <view class="weui-grid" hover-class="weui-grid_active" data-target="{{item}}" bindtap="goModule">
+                <image class="weui-grid__icon module-pic" src="{{'http://tzsbmn.com/' + item.picture}}" />
                 <view class="weui-grid__label">{{item.name}}</view>
-            </navigator>
+            </view>
         </block>
     </view>
   </view>

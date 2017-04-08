@@ -38,77 +38,77 @@ declare function getApp(): IApp;
 /**
  * Page 实现的接口对象
  */
-declare interface IPage {
+declare interface IPage<T> {
 
-  [methodName: string]: Object | ((this: IPage, args?: any) => any);
+  [methodName: string]: Object | ((this: IPage<T>, args?: any) => any);
 
 	/**
 	 * [read-only]页面的初始数据
 	 */
-	data?: any;
+	data?: T;
 
 	/**
 	 * 生命周期函数--监听页面加载
 	 */
-	onLoad?: (this: IPage, option: any) => void;
+	onLoad?: (this: IPage<T>, option: any) => void;
 
 	/**
 	 * 生命周期函数--监听页面初次渲染完成
 	 */
-	onReady?: (this: IPage) => void;
+	onReady?: (this: IPage<T>) => void;
 
 	/**
 	 * 生命周期函数--监听页面显示
 	 */
-	onShow?: (this: IPage) => void;
+	onShow?: (this: IPage<T>) => void;
 
 	/**
 	 * 生命周期函数--监听页面隐藏
 	 */
-	onHide?: (this: IPage) => void;
+	onHide?: (this: IPage<T>) => void;
 
 	/**
 	 * 生命周期函数--监听页面卸载
 	 */
-	onUnload?: (this: IPage) => void;
+	onUnload?: (this: IPage<T>) => void;
 
 	/**
 	 * 页面相关事件处理函数--监听用户下拉动作
 	 */
-	onPullDownRefresh?: (this: IPage) => void;
+	onPullDownRefresh?: (this: IPage<T>) => void;
 
 	/**
 	 * 页面上拉触底事件的处理函数
 	 */
-	onReachBottom?: (this: IPage) => void;
+	onReachBottom?: (this: IPage<T>) => void;
 
 	/**
 	 * 将数据从逻辑层发送到视图层，同时改变对应的 this.data 的值
 	 */
-	setData?: (this: IPage, data: any) => void;
+	setData?: (this: IPage<T>, data: T) => void;
 
 	/**
 	 * 强制更新
 	 */
-	forceUpdate?: (this: IPage) => void;
+	forceUpdate?: (this: IPage<T>) => void;
 
 	/**
 	 * 更新
 	 */
-	update?: (this: IPage) => void;
+	update?: (this: IPage<T>) => void;
 }
 
 /**
  * Page() 函数用来注册一个页面。
  * 接受一个 object 参数，其指定页面的初始数据、生命周期函数、事件处理函数等。
  */
-declare function Page(page: IPage): void;
+declare function Page<T>(page: IPage<T>): void;
 
 /**
  * getCurrentPages() 函数用于获取当前页面栈的实例，
  * 以数组形式按栈的顺序给出，第一个元素为首页，最后一个元素为当前页面。
  */
-declare function getCurrentPages(): IPage[];
+declare function getCurrentPages(): IPage<any>[];
 
 declare namespace wx {
 
@@ -137,6 +137,8 @@ declare namespace wx {
 	// ---------------------------------- 网络API列表 ----------------------------------
 
 	export interface RequestResult {
+		statusCode: number;
+		errMsg: string;
 
 		/**
 		 * 开发者服务器返回的内容
@@ -170,6 +172,8 @@ declare namespace wx {
 		 * 收到开发者服务成功返回的回调函数，res = {data: '开发者服务器返回的内容'}
 		 */
 		success?: (res?: RequestResult) => void;
+
+		fail?: (error?) => void;
 	}
 
 	/**
@@ -1109,6 +1113,11 @@ declare namespace wx {
 		version: string;
 	}
 
+	export interface LoadingOptions extends BaseOptions {
+		title?: string;
+		mask?: boolean;
+	}
+
 	export interface GetSystemInfoOptions extends BaseOptions {
 
 		/**
@@ -1315,6 +1324,10 @@ declare namespace wx {
 	 * 在当前页面显示导航条加载动画。
 	 */
 	export function showNavigationBarLoading(): void;
+
+	export function showLoading(opt: wx.LoadingOptions): void;
+
+	export function hideLoading(): void;
 
 	/**
 	 * 隐藏导航条加载动画。
@@ -1851,6 +1864,8 @@ declare namespace wx {
 
 	export interface GetUserInfoResult {
 
+		iv: string;
+
 		/**
 		 * 用户信息对象，不包含 openid 等敏感信息
 		 */
@@ -1870,10 +1885,12 @@ declare namespace wx {
 		 * 包括敏感数据在内的完整用户信息的加密数据，详细见加密数据解密算法
 		 */
 		encryptData: string;
+
+		encryptedData: string;
 	}
 
 	export interface GetUserInfoOptions extends BaseOptions {
-
+		withCredentials?: boolean;
 		/**
 		 * 接口调用成功的回调函数
 		 */

@@ -5,7 +5,7 @@
   </view>
 
   <view class="app-content">
-    <view>
+    <view class="question-type-container">
       <label class="question-type">{{questionType}}</label>
     </view>
     <view class="question-title">

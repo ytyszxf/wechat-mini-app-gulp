@@ -13,7 +13,6 @@
     "declaration": false,
     "baseUrl": "./src",
     "outDir": "dist",
-    "only-arrow-functions": false,
     "paths": {
     },
     "lib": [
