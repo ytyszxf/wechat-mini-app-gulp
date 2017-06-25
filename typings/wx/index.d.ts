@@ -1348,6 +1348,8 @@ declare namespace wx {
 	 */
 	export function navigateTo(options: NavigateToOptions): void;
 
+	export function switchTab(options: NavigateToOptions): void;
+
 	export interface RedirectToOptions extends BaseOptions {
 
 		/**

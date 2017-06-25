@@ -28,7 +28,7 @@ Page<State>({
   goModule(e) {
     let m: Module = e.currentTarget.dataset.target;
     AppState.instance.setCurrentModule(m);
-    wx.navigateTo({
+    wx.switchTab({
       url: '../index/index'
     });
   },

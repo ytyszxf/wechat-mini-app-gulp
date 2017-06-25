@@ -15,29 +15,35 @@ let state: State = {};
 
 let pageSettings: IPage<State> = {
   data: state,
-  onLoad() {
+  onShow() {
+    if (!appState.currentModule) {
+      wx.navigateTo({
+        url: '../modules/modules'
+      });
+      return;
+    }
     wx.setNavigationBarTitle({
-      title: `${AppState.instance.currentModule.name}模拟考试`.replace(/ /, '')
+      title: `${appState.currentModule.name}模拟考试`.replace(/ /, '')
     });
   },
-  navigateTo(e) {
-    let ref = e.currentTarget.dataset.ref;
-    switch (ref) {
-      case 'index':
-        Utils.redictTo('../index/index');
-        break;
-      case 'user':
-        Utils.redictTo('../user/user');
-        break;
-      case 'test':
-        Utils.redictTo('../test/test');
-        break;
-      default:
-        break;
-    }
-  },
+  // navigateTo(e) {
+  //   let ref = e.currentTarget.dataset.ref;
+  //   switch (ref) {
+  //     case 'index':
+  //       Utils.redictTo('../index/index');
+  //       break;
+  //     case 'user':
+  //       Utils.redictTo('../user/user');
+  //       break;
+  //     case 'test':
+  //       Utils.redictTo('../test/test');
+  //       break;
+  //     default:
+  //       break;
+  //   }
+  // },
   startExam() {
-    if (examState.currentExam) {
+    if (examState.currentExam && !examState.currentExam.finished) {
       wx.navigateTo({
         url: '../exam/exam'
       });
@@ -59,6 +65,7 @@ let pageSettings: IPage<State> = {
         ExamService.createExam(appState.currentModule.id)
           .then((exam) => {
             examState.setCurrentExam(exam);
+            examState.setCurrentIndex(0);
             examState.setTimeLeft(exam.examTime * 60 * 1000);
             if (wx.hideLoading) {
               wx.hideLoading();

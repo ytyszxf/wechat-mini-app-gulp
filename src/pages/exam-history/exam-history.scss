@@ -1,0 +1,34 @@
+@import '../../global.scss';
+
+.history-banner {
+  background: $color-primary;
+  height: 140px;
+}
+
+.trophy {
+  width: 160px;
+  height: 110px;
+}
+
+.info-panel {
+  height: 120rpx;
+  background: darken($color-primary, 15%);
+  font-size: 23rpx;
+  color: #fff;
+}
+.exam-score {
+  font-size: 23rpx;
+  &.pass {
+    color: $color-success;
+  }
+  &.fail {
+    color: $color-danger;
+  }
+}
+.exam-rate {
+  font-size: 23rpx;
+}
+
+.exam-time {
+  font-size: 23rpx;
+}

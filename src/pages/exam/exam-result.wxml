@@ -1,0 +1,62 @@
+<template name="examResult">
+  <view class="modal-holder {{examFinished? 'active': ''}}">
+    <view class="backdrop"></view>
+    <view class="modal-container">
+      <view class="modal">
+        <view class="modal-header">
+          考试结果
+        </view>
+        <view class="modal-body">
+          <view class="summary">
+            <view>
+              <text class="exam-result-score {{finalScore> passScore? 'success' : 'danger'}}">{{finalScore}}</text><text>分</text>
+            </view>
+            <view>
+              <text>用时：{{timeConsumption}}</text>
+            </view>
+            <view>
+              <text>考试时间：{{startTime}}</text>
+            </view>
+          </view>
+          <view class="ui-list">
+            <navigator class="ui-list-item weui-flex" hover-class="hover" url="/pages/review/review?examId={{examId}}&mode=wrong">
+              <view class="item-header">
+                <icon class="icon iconfont icon-wrong danger" ></icon>
+              </view>
+              <view class="weui-flex__item ui-list-item__content info" >
+                <view>
+                  <label>查看错题</label>
+                  <view>
+                    <text>做错{{incorrectCount}}，未做{{totalNumber - questionAnswered}}，正确率{{(totalNumber - incorrectCount) / totalNumber * 100}}%</text>
+                  </view>
+                </view>
+              </view>
+              <view class="item-footer">
+                <icon class="icon iconfont icon-more"></icon>
+              </view>
+            </navigator>
+            <navigator class="ui-list-item weui-flex" hover-class="hover" url="/pages/review/review?examId={{examId}}&mode=full">
+              <view class="item-header">
+                <icon class="icon iconfont icon-imagetext info" ></icon>
+              </view>
+              <view class="weui-flex__item ui-list-item__content info">
+                <view>
+                  <label>查看试卷</label>
+                  <view>
+                    <text>查看试卷详情，只可查不可修改</text>
+                  </view>
+                </view>
+              </view>
+              <view class="item-footer">
+                <icon class="icon iconfont icon-more"></icon>
+              </view>
+            </navigator>
+          </view>
+          <view style="padding: 20px 30px;">
+            <button class="weui-btn" type="primary">返回</button>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+</template>

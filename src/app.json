@@ -1,11 +1,11 @@
 {
   "pages":[
-    "pages/modules/modules",
     "pages/index/index",
+    "pages/modules/modules",
     "pages/user/user",
     "pages/exam/exam",
-    "pages/logs/logs",
-    "pages/test/test"
+    "pages/exam-history/exam-history",
+    "pages/review/review"
   ],
   "window":{
     "backgroundTextStyle":"light",
@@ -17,5 +17,23 @@
     "request": 10000,
     "downloadFile": 10000
   },
-  "debug": true
+  "debug": true,
+  "tabBar": {
+    "list": [{
+      "pagePath": "pages/index/index",
+      "text": "首页",
+      "iconPath": "./resources/imgs/home.png",
+      "selectedIconPath": "./resources/imgs/home-active.png"
+    }, {
+      "pagePath": "pages/logs/logs",
+      "text": "百宝箱",
+      "iconPath": "./resources/imgs/store.png",
+      "selectedIconPath": "./resources/imgs/store-active.png"
+    }, {
+      "pagePath": "pages/user/user",
+      "text": "我",
+      "iconPath": "./resources/imgs/user.png",
+      "selectedIconPath": "./resources/imgs/user-active.png"
+    }]
+  }
 }

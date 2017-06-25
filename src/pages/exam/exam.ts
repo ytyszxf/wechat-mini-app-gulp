@@ -1,6 +1,9 @@
+import { ExamService } from './exam.service';
 import { examState } from '../../services/exam-state.service';
 import { ExamChoice } from '../../models/exam-choice.interface';
 import { Exam } from '../../models/exam.interface';
+import { ExamResult } from '../../models/exam-result.interface';
+
 import { Utils } from '../../utils/util';
 
 let touchStartPosition: {
@@ -23,6 +26,8 @@ interface State {
   choices?: ExamChoice[];
   questionType?: string;
   url?: string;
+  footerActive?: boolean;
+  result?: ExamResult;
 }
 
 let state: State = {
@@ -35,7 +40,9 @@ let state: State = {
   exam: {},
   choices: [],
   questionType: '',
-  url: 'http://tzsbmn.com/'
+  url: 'http://tzsbmn.com/',
+  footerActive: false,
+  result: {}
 };
 
 Page<State>({
@@ -44,6 +51,12 @@ Page<State>({
    * @override Page.onLoad
    */
   onShow() {
+    if (!examState.currentExam) {
+      wx.redirectTo({
+        url: '../index/index'
+      });
+      return;
+    }
     this.setData({
       exam: examState.currentExam,
       startTimeLeft: examState.timeLeft,
@@ -68,12 +81,38 @@ Page<State>({
       timer: timer
     });
   },
+  onChooseQuestion(e) {
+    let index = e.currentTarget.dataset.questionIndex;
+    (<Function> this['onToggleFooter'])();
+    (<Function> this['goIndex'])(index);
+  },
+  onSubmitExam() {
+    wx.showModal({
+      title: '提示信息',
+      content: '确定要提交考卷吗？',
+      showCancel: true,
+      success: (res) => {
+        if (!res.confirm) {
+          return;
+        }
+        let timeLeft = (this.data.startTimeLeft - (Utils.now() - this.data.startTime));
+        timeLeft = timeLeft < 0 ? 0 : timeLeft;
+        let timeConsumption = this.data.exam.examTime * 60 * 1000 - timeLeft;
+        let result = ExamService.submitExam(this.data.exam, timeConsumption);
+        this.setData({result});
+      }
+    });
+  },
   /**
    * @override Page.onUnload
    */
   onHide() {
-    let data: State = this.data;
     clearInterval(<NodeJS.Timer> this.data.timer);
+  },
+  onToggleFooter() {
+    this.setData({
+      footerActive: !this.data.footerActive
+    });
   },
   /**
    * @private
@@ -120,32 +159,31 @@ Page<State>({
       choices: choices
     });
     this.data.exam.examQuestions[this.data.questionIndex].examChoices = choices;
-    examState.setCurrentExam(this.data.exam);    
+    examState.setCurrentExam(this.data.exam);
   },
   setQuestionType() {
-    let questionTypes = ['判断题', '单选题', '单选题', '逻辑题'];
+    let questionTypes = ['判断题', '单选题', '多选题', '逻辑题'];
     let currentQuestion = this.data.exam.examQuestions[this.data.questionIndex];
     this.setData({
-      questionType: questionTypes[currentQuestion.questionTypeId]
+      questionType: questionTypes[currentQuestion.questionTypeId - 1]
     });
   },
   goNext() {
     let index = this.data.questionIndex + 1;
     index = index < this.data.exam.examQuestions.length ?
       index : this.data.exam.examQuestions.length - 1;
-    this.setData({
-      questionIndex: index
-    });
-    (<Function>this['updateView'])();
-    examState.setCurrentIndex(index);
+    (<Function>this['goIndex'])(index);
   },
   goPrevious() {
     let index = this.data.questionIndex - 1;
     index = index < 0 ? 0 : index;
+    (<Function>this['goIndex'])(index);
+  },
+  goIndex(index: number) {
     this.setData({
       questionIndex: index
     });
-    (<Function>this['updateView'])();
+    (<Function> this['updateView'])();
     examState.setCurrentIndex(index);
   },
   onTouchStart(e) {

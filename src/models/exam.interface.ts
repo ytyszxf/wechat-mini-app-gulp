@@ -12,4 +12,5 @@ export interface Exam {
   passScore?: number;
   startTime?: string;
   examFinalTime?: string;
+  finished?: boolean;
 }

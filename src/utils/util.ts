@@ -32,6 +32,12 @@ export class Utils {
     return (new Date(date)).getTime();
   }
 
+  public static date2LocalTime(date: string | Date) {
+    let _date: Date = date instanceof Date ? date : new Date(date);
+    return [_date.getFullYear(), _date.getMonth(), _date.getDate()].join('-')
+      + ' ' + [_date.getHours(), _date.getMinutes()].join(':');
+  }
+
   public static now() {
     return (new Date()).getTime();
   }

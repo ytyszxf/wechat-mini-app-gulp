@@ -1,8 +1,7 @@
 <!--index.wxml-->
-<import src="exam-result.wxml"/>
 <view class="app-container" bindtouchstart="onTouchStart" bindtouchend="onTouchEnd">
   <view class="app-header text-center">
-    <span>倒计时 {{timeLeft}}</span>
+    <span>考试历史</span>
   </view>
 
   <view class="app-content">
@@ -17,12 +16,15 @@
         </span>
     </view>
     <view>
-      <radio-group bindchange="onRadioQuectionChecked" wx:if="{{questionType === '单选题' || questionType === '判断题'}}">
+      <radio-group wx:if="{{questionType === '单选题' || questionType === '判断题'}}">
         <label class="weui-cell weui-check__label" wx:key="{{item.id}}" wx:for="{{choices}}">
           <radio class="weui-check" value="{{item.id}}" checked="{{item.bChose}}"/>
           <view class="weui-cell__hd weui-check__hd_in-checkbox">
             <icon class="weui-icon-checkbox_circle" type="circle" size="23" wx:if="{{!item.bChose}}"></icon>
-            <icon class="weui-icon-checkbox_success" type="success" size="23" wx:if="{{item.bChose}}"></icon>
+            <icon class="weui-icon-checkbox_success" 
+              type="{{item.bChose===item.bAnswer? 'success': 'cancel'}}" size="23" 
+              wx:if="{{item.bChose}}" 
+              color="{{item.bChose===item.bAnswer? '#77c34f': '#d4237a'}}"></icon>
           </view>
           <view class="weui-cell__bd question-choice" wx:if="{{!item.bImage}}">{{item.content}}</view>
           <view class="weui-cell__bd question-choice" wx:if="{{item.bImage}}">
@@ -30,7 +32,7 @@
           </view>
         </label>
       </radio-group>
-      <checkbox-group bindchange="onQuectionChecked" wx:if="{{questionType === '多选题' || questionType === '逻辑题'}}">
+      <checkbox-group wx:if="{{questionType === '多选题' || questionType === '逻辑题'}}">
         <label class="weui-cell weui-check__label" wx:key="{{item.id}}" wx:for="{{choices}}">
           <checkbox class="weui-check" value="{{item.id}}" checked="{{item.bChose}}"/>
           <view class="weui-cell__hd weui-check__hd_in-checkbox">
@@ -44,15 +46,8 @@
         </label>
       </checkbox-group>
     </view>
-    <view class="controls">
-      <button class="weui-btn inset" type="primary" 
-        wx:if="{{questionIndex < exam.examQuestions.length -1}}"
-        bindtap="goNext"
-      >下一题</button>
-      <button class="weui-btn inset" type="primary" 
-        wx:if="{{questionIndex > 0}}"
-        bindtap="goPrevious"
-      >上一题</button>
+    <view class="answers">
+      <span>正确答案：{{correctAnwser}}</span>
     </view>
   </view>
 </view>
@@ -62,17 +57,14 @@
 <view class="exam-footer {{footerActive? 'active': ''}}">
   <view>
     <view class="weui-flex control-container">
-      <view class="weui-flex__item">
-        <label bindtap="onSubmitExam">
-          <icon class="icon iconfont icon-rfq" ></icon>交卷
-        </label>
+      <view class="weui-flex__item" style="flex: 1;">
       </view>
       <view bindtap="onToggleFooter">
-        <icon class="icon iconfont icon-all"></icon> {{questionIndex + 1}} / {{exam.examQuestions.length}}
+        <icon class="icon iconfont icon-all"></icon> {{questionIndex + 1}} / {{questions.length}}
       </view>
     </view>
     <view class="footer-bottom weui-flex">
-      <view wx:for="{{exam.examQuestions}}"
+      <view wx:for="{{questions}}"
         bindtap="onChooseQuestion"
         data-question-index="{{index}}"
         class="weui-flex__item question-index-container" 

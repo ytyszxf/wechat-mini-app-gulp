@@ -1,0 +1,66 @@
+<view class="app-container" bindtouchstart="onTouchStart" bindtouchend="onTouchEnd">
+  <view class="app-content">
+    <view class="history-banner weui-flex primary">
+      <view class="weui-flex__item weui-flex v-center h-center">
+        <view class="text-center">
+          <view>
+            <text class="accent-number primary-contract">{{questionAnswered}}</text>
+          </view>
+          <view class="sub-title">
+            累计做题数
+          </view>
+        </view>
+      </view>
+      <view class="weui-flex__item weui-flex v-center h-center">
+        <view class="weui-flew__item">
+          <image class="trophy" src="http://www.fancywhale.cn/imgs/trophy.png"></image>
+        </view>
+      </view>
+    </view>
+    <view class="info-panel weui-flex h-space-between">
+      <view class="weui-flex__item weui-flex v-center h-center">
+        <view class="weui-flex__item text-center">
+          <view>
+            {{passCount}}
+          </view>
+          <view>
+            及格次数
+          </view>
+        </view>
+      </view>
+      <view class="weui-flex__item weui-flex v-center h-center">
+        <view class="weui-flex__item text-center">
+          <view>
+            {{examResults.length}}
+          </view>
+          <view>
+            累计考试次数
+          </view>
+        </view>
+      </view>
+      <view class="weui-flex__item weui-flex v-center h-center">
+        <view class="weui-flex__item text-center">
+          <view>
+            {{averageScore}}
+          </view>
+          <view>
+            考试预测
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class="weui-cells weui-cells_after-title">
+        <navigator class="weui-cell weui-cell_access"  
+            url="/pages/review/review?examId={{item.examId}}&mode=full" 
+            wx:key="{{examResult.examId}}" 
+            wx:for="{{examResults}}" 
+            hover-class="weui-cell_active">
+          <view class="weui-cell__bd">
+            <view class="exam-score {{item.finalScore < item.passScore ? 'fail': 'pass'}}">分数：{{item.finalScore}}</view>
+            <view class="exam-rate">正确率：{{item.totalNumber - item.incorrectCount}} / {{item.totalNumber}}</view>
+          </view>
+          <view class="weui-cell__ft exam-time weui-cell__ft_in-access">考试时间：{{item.startTime}}</view>
+        </navigator>
+    </view>
+  </view>
+</view>

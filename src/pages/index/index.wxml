@@ -23,13 +23,15 @@
               <view class="weui-grid__label">学习统计</view>
             </view>
             <view class="weui-grid c2 r1">
-              <image class="weui-grid__icon module-pic-sm" src="http://www.fancywhale.cn/imgs/history.png" />
-              <view class="weui-grid__label">考试记录</view>
+              <navigator url="../exam-history/exam-history" hover-class="navigator-hover">
+                <image class="weui-grid__icon module-pic-sm" src="http://www.fancywhale.cn/imgs/history.png" />
+                <view class="weui-grid__label">考试记录</view>
+              </navigator>
             </view>
           </view>
         </view>
       </block>
     </view>
   </view>
-  <template is="tabbar" data="{{activeIndex: 0}}"/>
+  <!--<template is="tabbar" data="{{activeIndex: 0}}"/>-->
 </view>

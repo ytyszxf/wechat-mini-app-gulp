@@ -1,5 +1,8 @@
+import { examState } from '../../services/exam-state.service';
 import { Exam } from '../../models/exam.interface';
+import { ExamResult } from '../../models/exam-result.interface';
 import { userService } from '../../services/user.service';
+import { Utils } from '../../utils/util';
 
 export class ExamService {
   public static createExam(moduleID: number): Promise<Exam> {
@@ -40,7 +43,7 @@ export class ExamService {
     });
   }
 
-  public static submitExam(exam: Exam) {
+  public static getWrongQuestions(exam: Exam) {
     let wrongQuestions = exam.examQuestions.filter((question) => {
       let correct = question.examChoices
         .reduce((flag, choice) => {
@@ -49,6 +52,41 @@ export class ExamService {
       return !correct;
     });
 
-    console.log(wrongQuestions);
+    return wrongQuestions;
+  }
+
+  public static submitExam(exam: Exam, timeConsumption: number) {
+    let examResult = ExamService.getExamResult(exam, timeConsumption);
+    exam.finished = true;
+    examState.setCurrentExam(exam);
+    examState.setFinishedExam(exam);
+    examState.addHistoryExam(exam);
+    examState.addExamResult(examResult);
+
+    return examResult;
+  }
+
+  private static getAnsweredQuestionCount(exam: Exam) {
+    return exam.examQuestions.filter((question) => {
+      return !!question.examChoices.find((choice) => choice.bChose);
+    }).length;
+  }
+
+  private static getExamResult(exam: Exam, timeConsumption: number) {
+    let incorrectCount = ExamService.getWrongQuestions(exam).length;
+
+    let result: ExamResult = {
+      finalScore: exam.examQuestions.length - incorrectCount,
+      timeConsumption: Utils.formatTimeHM(timeConsumption),
+      startTime: Utils.date2LocalTime(exam.startTime),
+      incorrectCount: incorrectCount,
+      examFinished: true,
+      totalNumber: exam.examQuestions.length,
+      passScore: exam.passScore,
+      examId: exam.id,
+      questionAnswered: this.getAnsweredQuestionCount(exam)
+    };
+
+    return result;
   }
 }

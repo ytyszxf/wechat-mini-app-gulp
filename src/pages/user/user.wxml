@@ -27,5 +27,5 @@
       </view>
     </view>
   </view>
-  <template is="tabbar" data="{{activeIndex: 2}}"/>
+  <!--<template is="tabbar" data="{{activeIndex: 2}}"/>-->
 </view>

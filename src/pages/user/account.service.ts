@@ -31,6 +31,9 @@ export class AccountService {
       wx.request({
         url: 'https://tzsbmn.com/api/Accounts/getAccountInfo',
         method: 'POST',
+        data: {
+          accountNumber: accountNumber
+        },
         success: (res) => {
           if (res.statusCode !== 200) {
             reject(res.data.error);
